@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import Grid from "./components/Grid";
+import "./App.css";
+import { getNextGen, getInitGrid } from "./GameOfLife";
+import { useState, useEffect } from "react";
 
 function App() {
+  const cols = 80;
+  const rows = 60;
+  const [grid, setGrid] = useState(getInitGrid(cols, rows));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGrid((grid) => getNextGen(grid, cols, rows));
+    }, 300);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleClick = (e) => {
+    if (e.target.name === "start") {
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="buttons-container">
+        <button name="start" onClick={handleClick}>
+          start
+        </button>
+        <button name="pause" onClick={handleClick}>
+          pause
+        </button>
+        <button name="reset" onClick={handleClick}>
+          reset
+        </button>
+      </div>
+      <Grid grid={grid} />
     </div>
   );
 }
