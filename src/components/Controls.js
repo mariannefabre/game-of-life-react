@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
 import "./Controls.css";
 
 const Controls = (props) => {
   const handleClick = (e) => {
     if (e.target.name === "start") {
       props.start();
+    } else if (e.target.name === "pause") {
+      props.pause();
+    } else if (e.target.name === "reset") {
+      props.reset();
     }
   };
 
