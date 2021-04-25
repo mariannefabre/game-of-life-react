@@ -3,17 +3,23 @@ import React from "react";
 import "./Grid.css";
 import Cell from "./Cell";
 
-const Grid = (props) => {
-  const renderedGrid = props.grid.map((col, index) => (
-    <div className="col" key={index}>
-      {" "}
-      {col.map((cell, index) => (
-        <Cell className="cell" key={index} value={cell}></Cell>
+const Grid = ({ grid }) => {
+  return (
+    <div className="Grid">
+      {grid.map((col, colIndex) => (
+        <div className="col" key={colIndex}>
+          {" "}
+          {col.map((cell, rowIndex) => (
+            <Cell
+              className="cell"
+              key={`${colIndex}${rowIndex}`}
+              value={cell}
+            ></Cell>
+          ))}
+        </div>
       ))}
     </div>
-  ));
-
-  return <div className="Grid">{renderedGrid}</div>;
+  );
 };
 
 export default Grid;
