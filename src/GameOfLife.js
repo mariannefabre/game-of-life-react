@@ -1,11 +1,14 @@
-const create2DArray = (cols, rows) => {
+export const create2DArray = (cols, rows) => {
+  if (!cols || !rows) {
+    return [];
+  }
   let arr = new Array(cols);
   for (let i = 0; i < cols; i++) {
     arr[i] = new Array(rows);
   }
   return arr;
 };
-const countNeighbors = (grid, cols, rows, col, row) => {
+export const countNeighbors = (grid, cols, rows, col, row) => {
   let count = 0;
   if (col - 1 >= 0) {
     count += grid[col - 1][row];
@@ -34,7 +37,7 @@ const countNeighbors = (grid, cols, rows, col, row) => {
   return count;
 };
 
-export function getNextGen(grid, cols, rows) {
+export function getNextGrid(grid, cols, rows) {
   let nextGrid = create2DArray(cols, rows);
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
