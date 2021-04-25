@@ -1,26 +1,23 @@
 import Grid from "./components/Grid";
 import Controls from "./components/Controls";
 import "./App.css";
-import { getNextGen, getInitGrid } from "./GameOfLife";
-import { useState, useEffect } from "react";
+import { getNextGrid, getInitGrid } from "./GameOfLife";
+import { useState, useCallback } from "react";
 
 function App() {
   const cols = 60;
-  const rows = 50;
+  const rows = 40;
   const [grid, setGrid] = useState(getInitGrid(cols, rows));
 
-  /*   useEffect(() => {
-    const interval = setInterval(() => {
-      setGrid((grid) => getNextGen(grid, cols, rows));
-    }, 300);
-    return () => clearInterval(interval);
-  }, []); */
-
-  const start = () => {
+  const start = useCallback(() => {
     setInterval(() => {
-      setGrid((grid) => getNextGen(grid, cols, rows));
+      setGrid((grid) => getNextGrid(grid, cols, rows));
     }, 300);
-  };
+  }, []);
+
+  /*   const pause = () => {
+    clearInterval( interval );
+  }; */
 
   return (
     <div className="App">
